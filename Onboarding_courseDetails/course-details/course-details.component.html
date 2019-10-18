@@ -1,0 +1,60 @@
+<div>
+  <div class="bg-primary" style="height: 30px;padding: 10px 0px 30px 0px;margin: 15px 0px 0px 0px;font-size: medium;font-weight: bold;">
+        <p class="bg-primary">
+            Course Detail
+        </p>
+  </div>
+
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit(courseForm.value)">
+  <div class="form-group col-md-6 col-sm-4 " style="height: 50px;padding: 10px 10px 10px 5px;margin: 10px 0px 15px 0px;">
+   <label>Title</label>
+   <input type="text" class="form-control" formControlName="title" required>
+   <span style="color:red"  *ngIf="title.errors && (title.dirty || title.touched)">
+       <span *ngIf="title.errors.required">Title is required</span>
+   </span>
+  </div>
+  <div class="form-group col-md-6 col-sm-4 " style="height: 50px;padding: 10px 10px 10px 5px;margin: 10px 0px 15px 0px;">
+    <label>URL</label>
+    <input type="text" class="form-control" formControlName="url" required>
+    <span style="color:red"  *ngIf="url.errors && (url.dirty || url.touched)">
+        <span *ngIf="url.errors.required">URL is required</span>
+    </span>
+  </div>
+  <div class="form-group col-md-6 col-sm-4" style="height: 50px;padding: 10px 10px 10px 5px;margin: 20px 0px 15px 0px;">
+    <label>Description</label>
+    <input type="text" class="form-control" formControlName="description">
+  </div>
+  <div class="form-group col-md-6 col-sm-4" style="height:50px;padding: 10px 10px 10px 5px;margin: 20px 0px 15px 0px;">
+  <label>Document Type</label>
+  <select class="form-control" formControlName="docType" >
+  <option [ngValue]="null">Select Document Type</option>
+  <option *ngFor="let doc of documentType" [value]="doc">
+  {{doc}}
+  </option>
+  </select>
+  <span style="color:red"  *ngIf="docType.errors && (docType.dirty || docType.touched)">
+        <span *ngIf="docType.errors.required">Document Type is required</span>
+  </span>
+  </div>
+  <div class="form-group col-md-6 col-sm-4" style="height: 39px;padding: 10px 10px 10px 5px;margin: 20px 0px 15px 0px;">
+  <label>Course Type</label>
+  <select class="form-control" formControlName="courseName">
+  <option [ngValue]="null">Select Course Type</option>
+  <option *ngFor="let course of courseType" [value]="course">
+  {{course}}
+  </option>
+  </select>
+  <span style="color:red"  *ngIf="courseName.errors && (courseName.dirty || courseName.touched)">
+        <span *ngIf="courseName.errors.required">Course name is required</span>
+  </span>
+  </div>
+  <div class="form-group col-md-6 col-sm-4 " style="height: 39px;padding: 10px 10px 10px 5px;margin: 20px 0px 15px 0px;">
+    <label>Dummy</label>
+    <input type="text" class="form-control">
+  </div>
+  <div class="form-group  col-md-6 col-sm-6 col-md-offset-5" style="justify-content: center;margin-top:35px">
+  <button name="add" type="submit" value="add" class="btn btn-primary">{{ mode }}</button>
+  <a value="cancel" class="btn btn-danger" routerLink="/courseList">Back</a>
+  </div>
+  </form>
+</div>

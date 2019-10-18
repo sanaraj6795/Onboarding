@@ -1,0 +1,34 @@
+<div class="container">
+  <div>
+    <div class="col-md-12" style="text-align:left">
+      <a [routerLink]="['/courseDetail',0]" class="glyphicon glyphicon-plus-sign">Add Course</a>
+    </div>
+    <div class="responsive_table">
+    <table class="table">
+      <thead>
+        <tr class="row">
+          <th> Title </th>
+          <th> URL </th>
+          <th> Description </th>
+          <th> Document Type </th>
+          <th> Course type </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let courseData of courseDetail;let i=index" class="row">
+          <td>{{courseData.title}}</td>
+          <td>{{courseData.url}}</td>
+          <td>{{courseData.description}}</td>
+          <td>{{courseData.documentType}}</td>
+          <td>{{courseData.courseType}}</td>
+          <td>
+            <a class="glyphicon glyphicon-pencil" title="Edit" [routerLink]="['/courseDetail',courseData.courseId]"></a>
+            <span class="glyphicon glyphicon-remove " title="Delete" (click)="deleteCourseDetail(courseData.courseId)"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
