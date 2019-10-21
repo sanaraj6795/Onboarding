@@ -1,0 +1,78 @@
+<div class="container">
+ <div class="bg-primary" style="height: 30px;padding: 10px 0px 30px 0px;margin: 15px 10px 0px 0px;font-size: medium;font-weight: bold;">
+        <p class="bg-primary">
+            Group Course
+        </p>
+  </div>
+  <div  style="height: 50px;margin-top:20px;margin-bottom:25px" class="row">
+   <div class="col-md-12">
+   <p style="font-weight: bold">Associate Id</p>
+   <input type="text" size="35" style="height:32px" [(ngModel)]="associateId">
+   <button name="add" type="submit" value="add" class="btn btn-info" style="height:30px;margin-left:30px" (click)="addAssociateId()">Add</button>
+  </div>
+  </div>
+  <div *ngIf="associateIdCount!=0">
+  <table class="table">
+      <thead>
+        <tr class="row">
+          <th> S.No </th>
+          <th> Associate Id </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="row">
+        <tr *ngFor="let courseData of associateIdList;let i=index" class="row">
+          <td>{{i+1}}</td>
+          <td>{{courseData}}</td>
+          <td>
+            <span class="glyphicon glyphicon-remove " title="Delete" (click)="deleteAssociateId(courseData)"></span>
+          </td>
+        </tr>
+      </tbody>
+ </table>
+ </div>
+<div class="row">
+ <div class="col-md-6">
+  <p style="font-weight: bold;">Role</p>
+  <select  [(ngModel)]="role" size="1" style="width:500px;height:32px;">
+  <option [ngValue]="null">Select Role Type</option>
+  <option *ngFor="let roles of roleType" [value]="roles">
+  {{roles}}
+  </option>
+  </select>
+ </div>
+ <div class="col-md-6">
+ <label>Start Date</label>
+ <input type="date" style="width:500px;height:32px;margin-top:5px" [(ngModel)]="startDate">
+ </div>
+</div>
+ <div class="form-group  col-md-6 col-sm-6 col-md-offset-5" style="margin-top:25px;">
+  <button name="generate" type="submit" value="generate" class="btn btn-danger" [disabled]="isGenerateDisabled" (click)="generateClicked()">Generate</button>
+  <button name="clear" type="submit" value="clear" class="btn btn-light" style="width:80px;margin-left:10px"(click)="clearData()">Clear</button>
+  <button name="addCourse" type="submit" value="addCourse" class="btn btn-info" style="width:100px;margin-left:10px" (click)="openDialog()">Add Course</button>
+</div>
+  <div *ngIf="isGenerateClicked">
+    <table class="table">
+      <thead>
+        <tr class="row">
+          <th> S.No </th>
+          <th> Day</th>
+          <th> Week </th>
+          <th> Date </th>
+          <th> CourseType </th>
+          <th>Title</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let courseData of groupCourse;let i=index" class="row">
+          <td>{{i+1}}</td>
+          <td>{{courseData.day}}</td>
+          <td>{{courseData.week}}</td>
+          <td>{{courseData.startDate | date : 'yyyy-MM-dd'}}</td>
+          <td>{{courseData.courseType}}</td>
+          <td>{{courseData.title}}</td>
+        </tr>
+      </tbody>
+    </table>  
+  </div>
+</div>
