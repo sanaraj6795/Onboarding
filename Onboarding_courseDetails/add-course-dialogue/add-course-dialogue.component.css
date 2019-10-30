@@ -1,9 +1,11 @@
-  table.center {
-    width:0%; 
-    margin-left:15%; 
-    margin-right:15%;
-  }
   .has-error {
     color: red;
     background-color: red;
+}
+
+@media(max-width: 900px) {
+    .responsive_table {
+        overflow-x: auto !important;
+        overflow-y: hidden
+    }
 }

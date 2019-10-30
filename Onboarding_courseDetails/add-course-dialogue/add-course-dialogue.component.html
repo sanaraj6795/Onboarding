@@ -1,38 +1,46 @@
-<div>
-  <form [formGroup]="courseForm" (ngSubmit)="onSearch(courseForm.value)" #myform="ngForm">
-    <div class="form-group col-md-6 col-sm-4" style="height: 50px;padding: 10px 10px 10px 5px;margin: 20px 0px 15px 0px;">
+<div class="center">
+<div  style="padding-bottom: 30px;padding-top: 30px;padding-right:20px;padding-left:20px;">
+  <form [formGroup]="courseForm" #myform="ngForm">
+    <div class="row">
+    <div class="form-group col-md-6 col-sm-6" style="height: 50px;padding: 10px 10px 10px 5px;margin: 20px 0px 15px 0px;">
       <label>Course Description</label>
       <input type="text" class="form-control" formControlName="description">
     </div>
-    <div class="form-group col-md-6 col-sm-4"  style="height: 39px;padding: 10px 10px 10px 5px;margin: 20px 0px 15px 0px;">
+    <div class="form-group col-md-6 col-sm-6"  style="height: 39px;padding: 10px 10px 10px 5px;margin: 20px 0px 15px 0px;">
       <label required>Course Type</label>
-      <select class="form-control" formControlName="courseName" required>
+      <select class="form-control" formControlName="courseName" id="courseName" [ngClass]="{ 'is-invalid': submitted && f.courseName.errors }">
       <option [ngValue]="null">Select Course Type</option>
      <option *ngFor="let course of courseType" [value]="course">
      {{course}}
      </option>
      </select>
-     <p style="color:red" *ngIf="courseForm.get('courseName').hasError('required') && myform.submitted">CourseName is required</p>
+     <div *ngIf="submitted && f.courseName.errors" class="invalid-feedback">
+              <div *ngIf="f.courseName.errors.required">Course Name is required</div>
     </div>
-    <div class="form-group  col-md-6 col-sm-6 col-md-offset-5" style="justify-content: center;margin-top:35px">
-      <button name="add" type="submit" value="add" class="btn btn-primary" >Search</button>
     </div>
-    </form>
-  <div  *ngIf="courseLength!=0" >
+    </div>
+    <div class="row">
+    <div class="form-group  col-md-6 col-sm-12 col-md-offset-5" style="justify-content: center;margin-top:35px">
+      <button name="add" type="submit" value="add" class="btn btn-primary" (click)="onSearch(courseForm.value)" >Search</button>
+    </div>
+    </div>
+    <div class="row">
+    <div class="responsive_table">
+    <div  *ngIf="courseLength!=0">
     <table class="table">
       <thead>
         <tr>
-          <th>S.no</th>
-          <th> Title </th>
-          <th> URL </th>
-          <th> Description </th>
-          <th> Document Type </th>
-          <th> Course type </th>
-          <th></th>
+          <th scope="col">S.no</th>
+          <th scope="col"> Title </th>
+          <th scope="col"> URL </th>
+          <th scope="col"> Description </th>
+          <th scope="col"> Document Type </th>
+          <th scope="col"> Course type </th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let courseData of courses;let i=index">
+        <tr *ngFor="let courseData of courses;let i=index" scope="row">
           <td>{{i+1}}</td>
           <td>{{courseData.title}}</td>
           <td>{{courseData.url}}</td>
@@ -47,4 +55,8 @@
             <button name="add" type="submit" value="add" class="btn btn-danger"  (click)="onAddSubmit()">Submit</button>
     </div>
     </div>
+    </div>
+    </div>
+    </form>
+</div>
 </div>
