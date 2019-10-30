@@ -20,7 +20,6 @@
               <div *ngIf="f.associateId.errors.required">Associate Id is required</div>
             </div>
         </div>
-
         <div class="">
           <div class="responsive_table">
             <div *ngIf="associateIdCount!=0" style="margin-left:15px;margin-right:15px;margin-top:20px;">
@@ -45,7 +44,6 @@
             </div>
           </div>
         </div>
-       
        <div class="" style="display:inline-block; width:100%;">
          <div class="form-group col-md-6 col-sm-12" style="height: 39px;margin-top:15px;margin-bottom:35px">
             <label>Role</label>
@@ -68,7 +66,6 @@
             </div>
         </div>
       </div>
-      
       <div class="form-group" style="text-align:center;">
        <button name="generate" type="submit" value="generate" class="btn btn-danger" [disabled]="isGenerateDisabled" style="margin-top:5px"
        (click)="generateClicked()">Generate</button>
@@ -77,8 +74,6 @@
        <button name="addCourse" type="submit" value="addCourse" class="btn btn-info" style="width:100px;margin-left:10px;margin-top:5px"
        (click)="openDialog()">Add Course</button>
      </div>
-
-     
      <div *ngIf="isGenerateClicked" class="responsive_table">
           <table class="table table-bordered table-striped">
             <thead>
@@ -103,10 +98,6 @@
             </tbody>
           </table>
       </div>
-
-
-
-
     </form>
 </div>
 </div>
