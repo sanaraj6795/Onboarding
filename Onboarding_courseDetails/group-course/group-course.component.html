@@ -1,78 +1,115 @@
-<div class="container">
- <div class="bg-primary" style="height: 30px;padding: 10px 0px 30px 0px;margin: 15px 10px 0px 0px;font-size: medium;font-weight: bold;">
-        <p class="bg-primary">
-            Group Course
-        </p>
-  </div>
-  <div  style="height: 50px;margin-top:20px;margin-bottom:25px" class="row">
-   <div class="col-md-12">
-   <p style="font-weight: bold">Associate Id</p>
-   <input type="text" size="35" style="height:32px" [(ngModel)]="associateId">
-   <button name="add" type="submit" value="add" class="btn btn-info" style="height:30px;margin-left:30px" (click)="addAssociateId()">Add</button>
-  </div>
-  </div>
-  <div *ngIf="associateIdCount!=0">
-  <table class="table">
-      <thead>
-        <tr class="row">
-          <th> S.No </th>
-          <th> Associate Id </th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody class="row">
-        <tr *ngFor="let courseData of associateIdList;let i=index" class="row">
-          <td>{{i+1}}</td>
-          <td>{{courseData}}</td>
-          <td>
-            <span class="glyphicon glyphicon-remove " title="Delete" (click)="deleteAssociateId(courseData)"></span>
-          </td>
-        </tr>
-      </tbody>
- </table>
- </div>
+<div class="center">
+<div class="container" style="padding-bottom: 30px;padding-top: 30px;">
+<div class="row align-center" class="col-sm-6 col-sm-offset-2 offset4">
+      <div class="column align-center">
+        <h3 style="color: #623073;">Group Course</h3>
+      </div>
+</div>
 <div class="row">
- <div class="col-md-6">
-  <p style="font-weight: bold;">Role</p>
-  <select  [(ngModel)]="role" size="1" style="width:500px;height:32px;">
-  <option [ngValue]="null">Select Role Type</option>
-  <option *ngFor="let roles of roleType" [value]="roles">
-  {{roles}}
-  </option>
-  </select>
- </div>
- <div class="col-md-6">
- <label>Start Date</label>
- <input type="date" style="width:500px;height:32px;margin-top:5px" [(ngModel)]="startDate">
- </div>
+<div class="col-sm-6 col-sm-offset-3 offset4">
+<form [formGroup]="courseForm">
+          <div class="" style="margin-left:15px;margin-right:15px;margin-top:10px">
+          <label>Associate Id</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="associateId" formControlName="associateId" [ngClass]="{ 'is-invalid': submitted && f.associateId.errors }">
+            <span class="input-group-btn">
+            <button class="btn" name="add" value="add" type="submit" style="background-color: #e2542f;color: white" (click)="addAssociateId()">Add</button>
+           </span>
+          </div>
+          <div *ngIf="submitted && f.associateId.errors" class="invalid-feedback">
+              <div *ngIf="f.associateId.errors.required">Associate Id is required</div>
+            </div>
+        </div>
+
+        <div class="">
+          <div class="responsive_table">
+            <div *ngIf="associateIdCount!=0" style="margin-left:15px;margin-right:15px;margin-top:20px;">
+              <table class="table table-borderless">
+                <thead>
+                  <tr style="background-color: #623073;color: #fff;">
+                    <th scope="col"> S.No </th>
+                    <th scope="col"> Associate Id </th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let courseData of associateIdList;let i=index" scope="row">
+                    <td>{{i+1}}</td>
+                    <td>{{courseData}}</td>
+                    <td>
+                      <span class="glyphicon glyphicon-remove " title="Delete" (click)="deleteAssociateId(courseData)"></span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+       
+       <div class="" style="display:inline-block; width:100%;">
+         <div class="form-group col-md-6 col-sm-12" style="height: 39px;margin-top:15px;margin-bottom:35px">
+            <label>Role</label>
+            <select class="form-control" id="role" formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+             <option [ngValue]="null">Select Role Type</option>
+             <option *ngFor="let roles of roleType" [value]="roles">
+             {{roles}}
+             </option>
+             </select>
+             <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+              <div *ngIf="f.role.errors.required">Role is required</div>
+            </div>
+        </div>
+        <div class="form-group col-md-6 col-sm-12" style="height: 39px;margin-top:15px;margin-bottom:35px">
+            <label>Start Date</label>
+            <input type="text" class="form-control" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig" placement="bottom right"
+            id="startDate" formControlName="startDate" [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" >
+            <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
+              <div *ngIf="f.startDate.errors.required">StartDate is required</div>
+            </div>
+        </div>
+      </div>
+      
+      <div class="form-group" style="text-align:center;">
+       <button name="generate" type="submit" value="generate" class="btn btn-danger" [disabled]="isGenerateDisabled" style="margin-top:5px"
+       (click)="generateClicked()">Generate</button>
+       <button name="clear" type="submit" value="clear" class="btn btn-light" style="width:80px;margin-left:10px;margin-top:5px"
+       (click)="clearData()">Clear</button>
+       <button name="addCourse" type="submit" value="addCourse" class="btn btn-info" style="width:100px;margin-left:10px;margin-top:5px"
+       (click)="openDialog()">Add Course</button>
+     </div>
+
+     
+     <div *ngIf="isGenerateClicked" class="responsive_table">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr style="background-color: #623073;color: #fff;">
+                <th scope="col"> S.No </th>
+                <th scope="col"> Day</th>
+                <th scope="col"> Week </th>
+                <th scope="col"> Date </th>
+                <th scope="col"> CourseType </th>
+                <th scope="col">Title</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let courseData of groupCourse;let i=index" scope="row">
+                <td>{{i+1}}</td>
+                <td>{{courseData.day}}</td>
+                <td>{{courseData.week}}</td>
+                <td>{{courseData.startDate | date : 'yyyy-MM-dd'}}</td>
+                <td>{{courseData.courseType}}</td>
+                <td>{{courseData.title}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+
+
+
+
+    </form>
 </div>
- <div class="form-group  col-md-6 col-sm-6 col-md-offset-5" style="margin-top:25px;">
-  <button name="generate" type="submit" value="generate" class="btn btn-danger" [disabled]="isGenerateDisabled" (click)="generateClicked()">Generate</button>
-  <button name="clear" type="submit" value="clear" class="btn btn-light" style="width:80px;margin-left:10px"(click)="clearData()">Clear</button>
-  <button name="addCourse" type="submit" value="addCourse" class="btn btn-info" style="width:100px;margin-left:10px" (click)="openDialog()">Add Course</button>
 </div>
-  <div *ngIf="isGenerateClicked">
-    <table class="table">
-      <thead>
-        <tr class="row">
-          <th> S.No </th>
-          <th> Day</th>
-          <th> Week </th>
-          <th> Date </th>
-          <th> CourseType </th>
-          <th>Title</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let courseData of groupCourse;let i=index" class="row">
-          <td>{{i+1}}</td>
-          <td>{{courseData.day}}</td>
-          <td>{{courseData.week}}</td>
-          <td>{{courseData.startDate | date : 'yyyy-MM-dd'}}</td>
-          <td>{{courseData.courseType}}</td>
-          <td>{{courseData.title}}</td>
-        </tr>
-      </tbody>
-    </table>  
-  </div>
 </div>
+</div>
+          
