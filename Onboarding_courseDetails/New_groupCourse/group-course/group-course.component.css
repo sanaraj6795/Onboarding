@@ -1,0 +1,27 @@
+
+    @media(max-width: 800px) {
+    .responsive_table {
+        overflow-x: auto !important;
+        overflow-y: hidden
+    }
+
+    .mat-table {
+        min-width:800px;
+    }
+    }
+
+.flex {
+    display: flex;
+}
+
+.vertical-center-row {
+   margin:auto;
+  width:30%;
+  padding:63px;
+}
+
+a {
+    float: none;
+    display: block;
+  }
+
