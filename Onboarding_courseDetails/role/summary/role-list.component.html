@@ -1,0 +1,48 @@
+<div class="row align-center" style="padding-left: 15px;padding-bottom: 15px;">
+  <div class="column align-center text-center">
+    <h3 style="color: #623073;">Role</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col text-right" style="margin-right: 0px !important;margin-bottom: 10px;">
+    <button [routerLink]="['/onboarding/role-detail/add']" class="btn btn-primary">Add Role</button>
+  </div>
+</div>
+
+<div class="table-responsive text-nowrap table-content">
+  <table class="table table-bordered table-hover table-striped">
+    <thead>
+      <tr style="background-color: #623073;color: #fff;">
+        <th class="text-center">Role Id</th>
+        <th class="text-center">Role Code</th>
+        <th class="text-center">Role Name</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of roleDetails; let i= index">
+        <td>{{role.roleId}}</td>
+        <td>{{role.code}}</td>
+        <td>{{role.name}}</td>
+        <td>
+          <i class="fa fa-pencil-square-o" [routerLink]="['/onboarding/role-detail/edit', role.roleId]"
+            aria-hidden="true"></i>
+          <!-- <i class="fa fa-trash" (click)="deleteCourseDetail(courseData.id)" aria-hidden="true">
+          </i> -->
+        </td>
+      </tr>
+      <tr *ngIf="!roleDetails">
+        <td class="text-center" colspan="100%"> No Record Found</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row" *ngIf="roleDetails">
+  <div class="col" style="margin-right: 0px !important;">
+    <pagination [boundaryLinks]="true" [totalItems]="totalItems" class="float-right" (pageChanged)="pageChanged($event)"
+      [maxSize]="5" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+    </pagination>
+  </div>
+</div>
